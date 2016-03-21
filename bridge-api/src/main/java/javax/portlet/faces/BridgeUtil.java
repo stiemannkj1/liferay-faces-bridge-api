@@ -34,6 +34,7 @@ public final class BridgeUtil {
 	public static Bridge.PortletPhase getPortletRequestPhase() {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+
 		return getPortletRequestPhase(facesContext);
 	}
 
