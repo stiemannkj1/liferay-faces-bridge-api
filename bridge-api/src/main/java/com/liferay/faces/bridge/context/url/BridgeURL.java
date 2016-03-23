@@ -15,11 +15,7 @@
  */
 package com.liferay.faces.bridge.context.url;
 
-import java.net.MalformedURLException;
 import java.util.Map;
-
-import javax.portlet.BaseURL;
-import javax.portlet.PortletURL;
 
 
 /**
@@ -31,39 +27,10 @@ import javax.portlet.PortletURL;
 public interface BridgeURL {
 
 	/**
-	 * Converts the bridge URL to an instance of the {@link BaseURL} type.
-	 *
-	 * @return  The converted bridge URL.
-	 */
-	public BaseURL toBaseURL() throws MalformedURLException;
-
-	/**
 	 * Returns a string-based representation of the URL.
 	 */
 	@Override
 	public String toString();
-
-	/**
-	 * Flag indicating whether or not the URL is secure. For more information, see {@link
-	 * PortletURL#setSecure(boolean)}.
-	 *
-	 * @return  <code>true</code> if the URL is secure, otherwise <code>false</code>.
-	 */
-	public boolean isSecure();
-
-	/**
-	 * If the URL targets a Faces view, then returns the viewId. Otherwise, returns null.
-	 *
-	 * @return  if the URL targets a Faces View, returns the viewId. Otherwise <code>null</code>.
-	 */
-	public String getFacesViewTarget();
-
-	/**
-	 * Determines whether or not the URL is self-referencing, meaning, it targets the current Faces view.
-	 *
-	 * @return  <code>true</code> if self-referencing, otherwise <code>false</code>.
-	 */
-	public boolean isSelfReferencing();
 
 	/**
 	 * Returns the first value of the underlying {@link BridgeURL#getParameterMap()} with the specified <code>
@@ -84,22 +51,7 @@ public interface BridgeURL {
 	public void setParameter(String name, String[] value);
 
 	/**
-	 * Returns an mutable {@link Map} representing the URL parameters.
+	 * Returns a mutable {@link Map} representing the URL parameters.
 	 */
 	public Map<String, String[]> getParameterMap();
-
-	/**
-	 * Sets the flag indicating whether or not the URL is secure.
-	 *
-	 * @param  secure  <code>true</code> if secure, otherwise <code>false</code>.
-	 */
-	public void setSecure(boolean secure);
-
-	/**
-	 * Sets the flag indicating whether or not the URL is self-referencing, meaning, whether or not it targets the
-	 * current Faces view.
-	 *
-	 * @param  selfReferencing  <code>true</code> if self-referencing, otherwise <code>false</code>.
-	 */
-	public void setSelfReferencing(boolean selfReferencing);
 }
