@@ -20,10 +20,10 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.faces.FacesWrapper;
-import javax.faces.context.FacesContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.servlet.ServletContext;
 
@@ -105,7 +105,7 @@ public abstract class ContextMapFactory implements FacesWrapper<ContextMapFactor
 	 *                                preferably invoked over the @BridgePreDestroy annotation.
 	 */
 	public abstract Map<String, Object> getRequestScopeMap(PortletContext portletContext, PortletRequest portletRequest,
-		Set<String> removedAttributeNames, boolean preferPreDestroy);
+		PortletResponse portletResponse, Set<String> removedAttributeNames, boolean preferPreDestroy);
 
 	/**
 	 * Returns a {@link Map} of attributes stored in the underlying {@link javax.servlet.ServletContext}.
