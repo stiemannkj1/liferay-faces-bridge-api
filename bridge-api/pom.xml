@@ -190,11 +190,17 @@
 							# javax.el is automatically imported with the following versions:
 							# javax.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
 							Import-Package: javax.el;version="[2.2.0,4.0.0)",*
-							SPI-Consumer: *
-							# Require-Capability: \
-							#	osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",\
-							#	osgi.serviceloader;filter:="(osgi.serviceloader=javax.portet.faces.Bridge)";cardinality:=multiple;resolution:=optional
-								# osgi.serviceloader;filter:="(|(osgi.serviceloader=com.liferay.faces.bridge.BridgeFactoryFinder)(osgi.serviceloader=javax.portet.faces.Bridge))";cardinality:=multiple;resolution:=optional
+							# The following configuration enables the Bridge API bundle to obtain necessary SPI
+							# implementations. Although these services are technically required for Bridge API to
+							# function, any bundle which implements these services depends on Bridge API's
+							# packages. In order to allow Bridge API to be deployed before any bundles which implement
+							# its SPIs, each capability is marked as optional.
+							Require-Capability: \
+								osgi.serviceloader;filter:="(osgi.serviceloader=javax.portlet.faces.Bridge)";\
+								resolution:=optional;cardinality:=multiple,\
+								osgi.serviceloader;filter:="(osgi.serviceloader=com.liferay.faces.bridge.BridgeFactoryFinder)";\
+								resolution:=optional;cardinality:=multiple,\
+								osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)";resolution:=optional
 						]]>
 					</bnd>
 				</configuration>
