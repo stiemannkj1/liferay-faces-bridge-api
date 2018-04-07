@@ -189,7 +189,11 @@
 							-exportcontents: ${packages;VERSIONED}
 							# javax.el is automatically imported with the following versions:
 							# javax.el;version="[2.2.0,3.0.0)", but versions 3.0.0+ are also valid.
-							Import-Package: javax.el;version="[2.2.0,4.0.0)",*
+							Import-Package: \
+								!com.liferay.faces.bridge,\
+								!com.liferay.faces.bridge.*,\
+								javax.el;version="[2.2.0,4.0.0)",\
+								*
 							# The following configuration enables the Bridge API bundle to obtain necessary SPI
 							# implementations. Although these services are technically required for Bridge API to
 							# function, any bundle which implements these services depends on Bridge API's
