@@ -25,6 +25,8 @@ import javax.portlet.PortletContext;
 
 import org.osgi.annotation.versioning.ProviderType;
 
+import com.liferay.faces.bridge.api.internal.ServiceUtil;
+
 
 /**
  * This class provides a factory lookup mechanism similar to the {@link javax.faces.FactoryFinder} in the JSF API.
@@ -117,21 +119,7 @@ public abstract class BridgeFactoryFinder {
 		private static final BridgeFactoryFinder INSTANCE;
 
 		static {
-
-			ServiceLoader<BridgeFactoryFinder> serviceLoader = ServiceLoader.load(BridgeFactoryFinder.class);
-			Iterator<BridgeFactoryFinder> iterator = serviceLoader.iterator();
-
-			BridgeFactoryFinder bridgeFactoryFinder = null;
-
-			while ((bridgeFactoryFinder == null) && iterator.hasNext()) {
-				bridgeFactoryFinder = iterator.next();
-			}
-
-			if (bridgeFactoryFinder == null) {
-				throw new FacesException("Unable locate service for " + BridgeFactoryFinder.class.getName());
-			}
-
-			INSTANCE = bridgeFactoryFinder;
+			INSTANCE = ServiceUtil.createServiceInstance(BridgeFactoryFinder.class);
 		}
 
 		private OnDemandBridgeFactoryFinder() {

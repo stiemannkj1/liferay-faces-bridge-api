@@ -19,10 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -46,6 +44,7 @@ import com.liferay.faces.bridge.BridgeEventHandlerFactory;
 import com.liferay.faces.bridge.BridgeEventHandlerWrapper;
 import com.liferay.faces.bridge.BridgePublicRenderParameterHandlerFactory;
 import com.liferay.faces.bridge.BridgePublicRenderParameterHandlerWrapper;
+import com.liferay.faces.bridge.api.internal.ServiceUtil;
 
 
 /**
@@ -814,17 +813,7 @@ public class GenericFacesPortlet extends GenericPortlet {
 	private Bridge getBridgeService() {
 
 		if (bridgeService == null) {
-
-			ServiceLoader<Bridge> serviceLoader = ServiceLoader.load(Bridge.class);
-
-			if (serviceLoader != null) {
-
-				Iterator<Bridge> iterator = serviceLoader.iterator();
-
-				while ((bridgeService == null) && iterator.hasNext()) {
-					bridgeService = iterator.next();
-				}
-			}
+			bridgeService = ServiceUtil.createServiceInstance(Bridge.class);
 		}
 
 		return bridgeService;
